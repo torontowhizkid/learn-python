@@ -1,7 +1,14 @@
+"""
+Tic Tac Toe - Simple Two User Game
+Added additional validations for negative scenarios
+"""
+
+# initialize global variables
 board = ["", " ", " ", " ", " ", " ", " ", " ", " ", " "]
 spots = ["", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
 
+# print board
 def print_header():
     print("\n")
     print("SPOTS AVAILABLE \t ACTUAL GAME")
@@ -16,6 +23,7 @@ def print_header():
     print("\n")
 
 
+# check if board is full
 def game_ended(board):
     if " " in board:
         return False
@@ -23,8 +31,9 @@ def game_ended(board):
         return True
 
 
+# check if user entry is valid
 def is_valid_entry(spot, player):
-    if(spot.isdigit()):
+    if (spot.isdigit()):
         if 1 <= int(spot) <= 9:
             return True, int(spot)
         else:
@@ -45,6 +54,7 @@ def is_valid_entry(spot, player):
             return False, int(new_spot)
 
 
+# check if user selected spot is empty
 def empty_space(board, spot, player):
     if board[spot] == " ":
         return True, spot
@@ -58,6 +68,7 @@ def empty_space(board, spot, player):
             return False, int(new_spot)
 
 
+# check if a player won
 def did_player_win(board, player):
     if (board[1] == player and board[2] == player and board[3] == player) or \
             (board[4] == player and board[5] == player and board[6] == player) or \
@@ -74,6 +85,7 @@ def did_player_win(board, player):
 
 print_header()
 
+# handle user actions
 while True:
     p1_response = input("PLAYER 1 (X): Choose an empty space for X. ")
     chk_entry_p1 = is_valid_entry(p1_response, "PLAYER 1 (X)")

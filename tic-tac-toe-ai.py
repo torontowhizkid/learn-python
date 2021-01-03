@@ -1,6 +1,11 @@
+"""
+Tic Tac Toe - User vs. Bot
+Bot uses random selection
+"""
 import random
 import sys
 
+# initialize global variables
 board = ["", " ", " ", " ", " ", " ", " ", " ", " ", " "]
 spots = [" ", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 computer = 0
@@ -8,6 +13,7 @@ user = 0
 ties = 0
 
 
+# print game instructions
 def game_instructions():
     print("""  
      ____  ____  ___    ____   __    ___    ____  _____  ____ 
@@ -25,6 +31,7 @@ def game_instructions():
     print(" 7 | 8 | 9 ")
 
 
+# initialize the board when user opts to replay
 def reinitialize_board():
     board.clear()
     spots.clear()
@@ -32,6 +39,7 @@ def reinitialize_board():
     spots.extend([" ", "1", "2", "3", "4", "5", "6", "7", "8", "9"])
 
 
+# print board
 def print_header():
     print("\n")
     print(" " + board[1] + " | " + board[
@@ -45,6 +53,7 @@ def print_header():
     print("\n")
 
 
+# check if game has ended
 def game_ended(board):
     if " " in board:
         return False
@@ -52,6 +61,7 @@ def game_ended(board):
         return True
 
 
+# validate if user entered a valid entry i.e. 1 to 9 only
 def is_valid_entry(spot, player):
     if (spot.isdigit()):
         if 1 <= int(spot) <= 9:
@@ -74,6 +84,7 @@ def is_valid_entry(spot, player):
             return False, int(new_spot)
 
 
+# validate if user selected an empty spot (not already taken)
 def empty_space(board, spot, player):
     if board[spot] == " ":
         return True, spot
@@ -87,6 +98,7 @@ def empty_space(board, spot, player):
             return False, int(new_spot)
 
 
+# check if game is over, did player win with the new entry
 def did_player_win(board, player):
     if (board[1] == player and board[2] == player and board[3] == player) or \
             (board[4] == player and board[5] == player and board[6] == player) or \
@@ -101,6 +113,7 @@ def did_player_win(board, player):
         return False
 
 
+# bot automated play - random selection
 def ai_play():
     new_array = [i for i in spots if i != " "]
     choice = random.choice(new_array)
@@ -108,6 +121,7 @@ def ai_play():
     return int(choice)
 
 
+# user actions and validations
 def game():
     global user, computer, ties
     game_instructions()
@@ -177,4 +191,5 @@ def game():
                 sys.exit()
 
 
+# call game function
 game()
